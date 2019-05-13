@@ -20,12 +20,12 @@ chmod 600 cnv_rsa
 ```
 
 ### Connecting to your Instance
-This lab should be performed on **YOUR ASSIGNED INSTANCE** as `centos` user unless otherwise instructed.
+This lab should be performed on **YOUR ASSIGNED INSTANCE** as `cloud` user unless otherwise instructed.
 
 **_NOTE_**: Please be respectful and only connect to your assigned instance. Every instance for this lab uses the same public key so you could accidentally connect to the wrong system. If you have any issues, please inform an instructor.
 
 ```
-ssh -i cnv_rsa centos@student<number>.cnvlab.gce.sysdeseng.com
+ssh -i cnv_rsa cloud@student<number>.cnvlab.gce.sysdeseng.com
 ```
 
 The output should be something similar to:

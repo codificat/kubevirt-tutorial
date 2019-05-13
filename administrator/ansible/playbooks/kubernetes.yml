@@ -1,0 +1,9 @@
+---
+- hosts: all
+  roles:
+    - common
+    - kubernetes
+    - { role: kubevirt, ansible_become: false }
+    - { role: local-storage, ansible_become: false }
+    - { role: helm, ansible_become: false }
+    - { role: prometheus, ansible_become: false }

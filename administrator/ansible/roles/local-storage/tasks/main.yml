@@ -1,0 +1,24 @@
+---
+#- name: Create directory for local volumes provisioner manifests 
+#  file:
+#    state: directory
+#    path: /home/{{ ansible_user }}/local-storage-manifests
+#    mode: 0755
+#    owner: "{{ ansible_user }}"
+#
+#- name: Copy local storage provisioner custom manifests
+#  copy:
+#    src: files/local-storage-manifests
+#    dest: /home/{{ ansible_user }}/
+#    mode: 0755
+#    owner: "{{ ansible_user }}"
+#
+- name: Create StorageClass for local volumes
+  k8s:
+    state: present
+    resource_definition: "{{ lookup('file', 'files/local-storage-manifests/sc.yml') }}"
+
+- name: Deploy local storage provisioner
+  k8s:
+    state: present
+    resource_definition: "{{ lookup('file', 'files/local-storage-manifests/provisioner.yml') }}"
