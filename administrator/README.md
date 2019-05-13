@@ -40,7 +40,7 @@ ANSIBLE_ROLES_PATH=roles ansible-playbook -i inventories/<inventory> -u cloud --
 
 ## Terraform variable file example
 
-Variable files are used to override (and/or define) variables listed in [terraform variables definition file](administrator/terraform/variables.tf).
+Variable files are used to override (and/or define) variables listed in [terraform variables definition file](terraform/variables.tf).
 
 ```hcl
 libvirt_url="qemu+ssh://sjr@libvirt.domain.tld/system"
