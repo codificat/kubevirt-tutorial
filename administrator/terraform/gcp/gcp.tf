@@ -35,6 +35,5 @@ module "gcp_kubevirt_lab" {
 	boot_disk_size_gb   = "${var.gcp_boot_image_size_gb}"
 	boot_disk_image   	= "${var.gcp_boot_image}"
     data_disk_size_gb   = "30"
-    service_account     = "${var.gcp_sa}"
     tag					= "${var.gcp_instance_tag}"
 }
