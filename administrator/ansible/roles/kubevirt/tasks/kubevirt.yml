@@ -11,6 +11,7 @@
     dest: /home/{{ ansible_user }}/.local/bin/virtctl
     mode: 0755
     owner: "{{ ansible_user }}"
+    validate_certs: false
   retries: 5
   delay: 5
   vars:
