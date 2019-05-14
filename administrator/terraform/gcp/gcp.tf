@@ -19,7 +19,7 @@ resource "google_compute_firewall" "default" {
 
     allow {
       protocol = "tcp"
-      ports    = ["80", "443", "8443"]
+      ports    = ["80", "443", "8443", "30300"]
     }
     
     source_tags = ["${var.gcp_instance_tag}"]
