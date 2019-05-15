@@ -2,7 +2,7 @@
 
 ## Install the Hyperconverged Cluster Operator
 
-In this section, we are going to use the HCO to install all KubeVirt components. For it to work, we have to first apply some manifests that will create the required Custom Resource Definitions (a copy of the manifests should be already available on each student's machine).
+In this section, we are going to use the [HCO](https://github.com/kubevirt/hyperconverged-cluster-operator) to install all KubeVirt components. For it to work, we have to first apply some manifests that will create the required Custom Resource Definitions (a copy of the manifests should be already available on each student's machine).
 
 All the manifests can be found in the `~/hco`, spend some time exploring them and all the objects they create.
 
@@ -133,6 +133,6 @@ Server Version: version.Info{GitVersion:"v0.17.0-46+3d98bf75699585", GitCommit:"
 
 This concludes this section, please head to the next one!
 
-[Next Lab](../lab3/lab4.md)\
-[Previous Lab](../lab1/lab2.md)\
+[Next Lab](../lab4/lab4.md)\
+[Previous Lab](../lab2/lab2.md)\
 [Home](../../README.md)
