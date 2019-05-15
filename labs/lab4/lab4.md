@@ -26,6 +26,7 @@ Sample output:
 
 ```shell
 kubectl get pods -w
+
 NAME                                               READY   STATUS              RESTARTS   AGE
 cdi-operator-64fdf8c7db-sgj66                      0/1     ContainerCreating   0          5s
 cluster-network-addons-operator-67fcc95fdd-kzn7r   0/1     ContainerCreating   0          6s
@@ -56,6 +57,7 @@ Sample output:
 
 ```shell
 kubectl get pods -w --all-namespaces
+
 NAMESPACE                   NAME                                                     READY   STATUS              RESTARTS   AGE
 ...
 
@@ -119,3 +121,18 @@ kubevirt-hyperconverged     virt-handler-gn8l9                                  
 kubevirt-hyperconverged     virt-controller-56577d97b5-dh4bw                         1/1     Running                      0          85s
 kubevirt-hyperconverged     virt-controller-56577d97b5-m88pm                         1/1     Running                      0          92s
 ```
+
+Let's verify we can reach KubeVirt API:
+
+```shell
+virtctl version
+
+Client Version: version.Info{GitVersion:"v0.17.0", GitCommit:"c0f960702dce718419a767f3913669f539229ff0", GitTreeState:"clean", BuildDate:"2019-05-05T08:09:14Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{GitVersion:"v0.17.0-46+3d98bf75699585", GitCommit:"3d98bf7569958581328676e8aa27c570be971774", GitTreeState:"clean", BuildDate:"2019-05-14T15:38:59Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+```
+
+This concludes this section, please head to the next one!
+
+[Next Lab](../lab3/lab4.md)\
+[Previous Lab](../lab1/lab2.md)\
+[Home](../../README.md)
