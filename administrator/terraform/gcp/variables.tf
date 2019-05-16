@@ -65,7 +65,7 @@ variable "gcp_sa" {
 
 variable "ssh_pub_key" {
   type        = "string"
-  description = "SSH Public key, it's added to the user cloud"
+  description = "SSH Public key, it's added to the cloud user"
   default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD0IFmpMQHlk87299njLxEgMJ3BAVN0zXlPQvE/vT1rHrluD+/vosXNdpzCEMSd3VQHduzXTOhNxYYAEgL3vy9EgCWnofJ96aPTLUz6aNdviltkfwtn8npPQ7ojnsa02ATHUjqI5ZbiQo2BcJScx3bEr/nvlczcuV6QF0EmKTPAEYRM1QQtE3TpozEAjOzElQkMepZc+RxI9k3HoSlWRiZK9o2mu96Y+aaCs9hXlmiYL7fbPVMnN83U3NMAAGqzUXT0QXjdVIuxEEvRYX2vE4LqjAopmTvfLy6c3VvO88w/0nbabQCoiWSTkZ/Wh4Pv0WVAyuahnr99sURQ5j2Zmd2f jparrill@deimos.localdomain"
 }
 
