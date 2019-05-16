@@ -25,15 +25,30 @@ resource "google_compute_firewall" "default" {
     source_tags = ["${var.gcp_instance_tag}"]
 }
 
+module "google-dns-managed-zone" {
+    source      = "github.com/Eimert/terraform-google-dns-managed-zone"
+    dns_name    = "${var.gcp_network_name}"
+    dns_zone    = "${var.dns_domain_name}"
+    description = "Kubevirt Laboratory for ${var.lab_description}"
+}
+
 module "gcp_kubevirt_lab" {
-	source = "github.com/lumapps/terraform-google-compute-instance"
-	
-	amount       		= "${var.gcp_instances}"
-	region       		= "${var.gcp_region}"
-	name_prefix  		= "${var.hostname_prefix}"
-	machine_type 		= "${var.gcp_instance_size}"
-	boot_disk_size_gb   = "${var.gcp_boot_image_size_gb}"
-	boot_disk_image   	= "${var.gcp_boot_image}"
-    data_disk_size_gb   = "30"
-    tag					= "${var.gcp_instance_tag}"
+    source          = "github.com/jparrill/terraform-google-compute-engine-instance"
+    amount          = "${var.gcp_instances}"
+    region          = "${var.gcp_region}"
+    zone            = "${var.gcp_zone}"
+    # hostname format: name_prefix-amount
+    name_prefix     = "${var.hostname_prefix}"
+    machine_type    = "${var.gcp_instance_size}"
+    disk_type       = "pd-ssd"
+    disk_size       = "${var.gcp_boot_image_size_gb}"
+    disk_image      = "${var.gcp_boot_image}"
+    
+    dns_name        = "${module.google-dns-managed-zone.dns_name}"
+    dns_zone        = "${module.google-dns-managed-zone.dns_zone}"
+    dns_record_name = "${var.gcp_instance_tag}"
+    
+    user_data       = "Kubevirt Laboratory for ${var.lab_description}"
+    username        = "${var.lab_username}"
+    public_key_path = "~/.ssh/id_rsa.pub"
 }

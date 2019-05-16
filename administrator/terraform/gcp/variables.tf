@@ -85,3 +85,15 @@ variable "hostname_prefix" {
   default     = "kubevirt-lab"
   description = "Prefix add to hostnames"
 }
+
+variable "lab_description" {
+  type        = "string"
+  default     = "OpenSouthCode 2019"
+  description = "User data for new user"
+}
+
+variable "lab_username" {
+  type        = "string"
+  default     = "kubevirt-user"
+  description = "New user for Laboratory"
+}
