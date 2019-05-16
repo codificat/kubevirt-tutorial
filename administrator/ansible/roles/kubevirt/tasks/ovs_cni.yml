@@ -9,3 +9,8 @@
   delegate_to: localhost
   vars:
     ansible_become: False
+
+- name: Create net-attach-def for br1
+  k8s:
+    state: present
+    resource_definition: "{{ lookup('file', 'files/ovs-cni-manifests/nad-br1.yml') }}"

@@ -19,34 +19,33 @@
     remote_src: yes
 
 - name: Make the master schedulable
-  shell: KUBECONFIG=/etc/kubernetes/admin.conf kubectl taint nodes --all node-role.kubernetes.io/master-
+  shell: kubectl taint nodes --all node-role.kubernetes.io/master-
   register: cmd_result
   failed_when: "('not found' not in cmd_result.stderr) and (cmd_result.stderr != '')"
-
-- name: Pausing for 2 minute
-  wait_for: timeout=120
-  delegate_to: localhost
   vars:
     ansible_become: False
 
 - name: Apply Flannel manifests
   k8s:
     state: present
-    kubeconfig: /etc/kubernetes/admin.conf
     resource_definition: "{{ lookup('file', 'files/kube-flannel.yml') }}"
+  vars:
+    ansible_become: False
 
-- name: Pausing for 2 minute
-  wait_for: timeout=120
+# TODO: Check for something reasonable, e.g. Flannel DS
+- name: Pausing for 3 minute
+  wait_for: timeout=180
   delegate_to: localhost
   vars:
     ansible_become: False
 
 - name: Scale CoreDNS deployment down to 1 replica
   k8s:
-    kubeconfig: /etc/kubernetes/admin.conf
     kind: Deployment
     name: coredns
     namespace: kube-system
     resource_definition:
       spec:
         replicas: 1
+  vars:
+    ansible_become: False
