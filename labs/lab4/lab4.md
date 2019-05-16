@@ -1,4 +1,4 @@
-# Lab 5
+# Lab 3
 
 ## Lab overview
 
@@ -24,10 +24,9 @@ $ kubectl wait deployment virt-operator --for condition=available
 deployment.extensions/virt-operator condition met
 
 $ kubectl create -f kubevirt-cr.yaml
-$ kubectl wait deployment -l kubevirt.io --for condition=available
+$ kubectl wait deployment -l app.kubernetes.io/managed-by=kubevirt-operator --for condition=available
 deployment.extensions/virt-api condition met
 deployment.extensions/virt-controller condition met
-deployment.extensions/virt-operator condition met
 ```
 
 Let's explore what's being deployed:
@@ -111,7 +110,7 @@ replicaset.apps/cdi-uploadproxy-cddbb95b    1         1         1       85m
 $ cd ~/kubevirt/kubevirt-ui-custom-manifests
 $ kubectl config set-context $(kubectl config current-context) --namespace=kubevirt
 $ kubectl create -f kubevirt_ui.yml
-$ kubectl wait pod -l app=kubevirt-web-ui --for condition=Ready
+$ kubectl wait pod -l app=kubevirt-web-ui --for condition=Ready --timeout=180s
 pod/kubevirt-web-ui-qmpwl condition met
 ```
 
