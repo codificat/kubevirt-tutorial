@@ -1,10 +1,4 @@
 ---
-- name: Get JSON information for KubeVirt latest version
-  uri:
-    url: https://api.github.com/repos/kubevirt/kubevirt/releases/latest
-    return_contents: yes
-  register: json_response
-
 - name: Install virtctl
   get_url:
     url: https://github.com/kubevirt/kubevirt/releases/download/{{ kubevirt_version }}/virtctl-{{ kubevirt_version }}-linux-amd64
@@ -14,36 +8,21 @@
     validate_certs: false
   retries: 5
   delay: 5
-  vars:
-    kubevirt_version: "{{ json_response.json.tag_name }}"
 
-- name: Clone HCO repository
-  git:
-    repo: 'https://github.com/kubevirt/hyperconverged-cluster-operator.git'
-    dest: /home/{{ ansible_user }}/hco
-    update: no
-    version: f9d5a80e345417a3ab73394d5841f532d2db394d
+- name: Create directory for KubeVirt manifests
+  file:
+    state: directory
+    path: /home/{{ ansible_user }}/kubevirt
+    mode: 0755
+    owner: "{{ ansible_user }}"
 
-# HCO workarounds
-- name: Create node-maintenance-operator namespace
-  k8s:
-    state: present
-    name: node-maintenance-operator
-    kind: Namespace
-    api_version: v1
-
-- name: Copy node-maintenance-operator patched manifests
+- name: Copy KubeVirt manifests
   copy:
-    dest: /home/{{ ansible_user }}/hco/deploy/converged/{{ item }}.yaml
-    src: files/hco-patches/{{ item }}.yaml
+    src: files/{{ item }}
+    dest: /home/{{ ansible_user }}/kubevirt/
+    mode: 0755
     owner: "{{ ansible_user }}"
   loop:
-    - cluster_role
-    - cluster_role_binding
-    - service_account
-
-- name: Add missing node-maintenance-operator CRD manifest
-  copy:
-    dest: /home/{{ ansible_user }}/hco/deploy/converged/crds/nodemaintenance_crd.yaml
-    src: files/hco-patches/nodemaintenance_crd.yaml
-    owner: "{{ ansible_user }}"
+    - kubevirt-ui-custom-manifests
+    - kubevirt-operator-manifests
+    - cdi-operator-manifests

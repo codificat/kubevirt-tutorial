@@ -1,18 +1,11 @@
 ---
-#- name: Create directory for local volumes provisioner manifests 
-#  file:
-#    state: directory
-#    path: /home/{{ ansible_user }}/local-storage-manifests
-#    mode: 0755
-#    owner: "{{ ansible_user }}"
-#
-#- name: Copy local storage provisioner custom manifests
-#  copy:
-#    src: files/local-storage-manifests
-#    dest: /home/{{ ansible_user }}/
-#    mode: 0755
-#    owner: "{{ ansible_user }}"
-#
+- name: Create local-volume-provisioner namespace
+  k8s:
+    state: present
+    name: local-volume-provisioner
+    kind: Namespace
+    api_version: v1
+
 - name: Create StorageClass for local volumes
   k8s:
     state: present
