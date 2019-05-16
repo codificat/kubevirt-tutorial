@@ -1,78 +1,63 @@
-## Install KubeVirt
+# Lab 4
 
-In this section, let's use the `kubevirt-operator.yaml` and `kubevirt-cr.yaml` manifest files from upstream github repo and explore it (you should have a copy on your lab machine). Then, we will deploy kubevirt with it.
+## Deploy our first Virtual Machine
 
-Explore `~/kubevirt-operator.yaml` file. Review the objects it contains
-
-Now, Install KubeVirt Operator . You should see several objects were created.
- 
-```
-oc apply -f ~/kubevirt-operator.yaml
-```
-
-Sample Output:
-
-```
-namespace/kubevirt created
-customresourcedefinition.apiextensions.k8s.io/kubevirts.kubevirt.io created
-clusterrole.rbac.authorization.k8s.io/kubevirt.io:operator created
-serviceaccount/kubevirt-operator created
-clusterrolebinding.rbac.authorization.k8s.io/kubevirt-operator created
-deployment.apps/virt-operator created
-
+```console
+$ cd ~/student-materials
+$ kubectl config set-context $(kubectl config current-context) --namespace=default
+$ kubectl create -f vm_containerdisk.yml
+virtualmachine.kubevirt.io/vm1 created
 ```
 
-Now, Install KubeVirt
- 
-```
-oc apply -f ~/kubevirt-cr.yaml
-```
+Check what just happened:
 
-Sample Output:
-
-```
-kubevirt.kubevirt.io/kubevirt created
+```console
+$ kubectl get vm
+NAME   AGE   RUNNING   VOLUME
+vm1    24s   false
 ```
 
-Review the objects that KubeVirt added.
+Notice the *RUNNING* field, the VM is stopped. That's actually coming from its definition we just applied:
 
-```
-oc project kubevirt
-oc get serviceaccount | grep kubevirt
-oc describe serviceaccount kubevirt-apiserver
-oc get pod
-HANDLER_POD=$(oc get pod -l kubevirt.io=virt-handler -o=custom-columns=NAME:.metadata.name --no-headers=true)
-oc describe pod $HANDLER_POD
-# review the files on the root of the filesystem of the pod, see the virt-handler executable
-oc exec -it $HANDLER_POD ls /bin
-oc get svc
-oc describe svc virt-api
+```yaml
+...
+spec:
+  running: false
+...
 ```
 
-There are other services and objects to take a look at.
+Let's use *virtctl* now to actually start our virtual machine:
 
-To review the objects through the OpenShift web console, access the console and log in as the `admin` user at `https://student<number>.cnvlab.gce.sysdeseng.com:8443`. Remember, you can use `oc status` to get your URL. Ignore the self signed certificate warning
-
-Open that URL in a browser, log in as the `admin` user with a password of `admin`.
-
-![openshift](images/openshift-console-login.png)
-
-Explore the `kubevirt` project by clicking on the project link in the right hand navigation pane.
-
-![openshift](images/openshift-console-view-all.png)
-
-Click on the different objects, explore the environment.
-
-#### Install virtctl
-
-Return to the CLI and install virtctl. This tool provides quick access to the serial and graphical ports of a VM, and handle start/stop operations. Also run `virtctl` to get an idea of it's options.
-
+```console
+$ virtctl start vm1
+VM vm1 was scheduled to start
 ```
-export VERSION=v0.14.0
-curl -L -o /usr/bin/virtctl https://github.com/kubevirt/kubevirt/releases/download/$VERSION/virtctl-$VERSION-linux-amd64
-chmod -v +x /usr/bin/virtctl
-virtctl version
+
+A *virt-launcher* Pod should be starting, which will spawn the actual virtual machine:
+
+```console
+$ kubectl get pods -w
+NAME                      READY   STATUS    RESTARTS   AGE
+virt-launcher-vm1-2qflc   0/2     Running   0          12s
+virt-launcher-vm1-2qflc   0/2     Running   0          12s
+virt-launcher-vm1-2qflc   1/2     Running   0          17s
+virt-launcher-vm1-2qflc   2/2     Running   0          23s
 ```
+
+We can also use *kubectl* to check the virtual machine and its instance:
+
+```console
+$ kubectl get vm vm1
+NAME   AGE   RUNNING   VOLUME
+vm1    19m   true
+$ kubectl get vmi vm1
+NAME   AGE     PHASE     IP            NODENAME
+vm1    3m49s   Running   10.244.0.22   sjr-kubemaster.deshome.net
+```
+
+## Recap
+
+**WRITE A SMALL SUMMARY OF WHAT HAVE JUST HAPPENED**
 
 This concludes this section of the lab.
 

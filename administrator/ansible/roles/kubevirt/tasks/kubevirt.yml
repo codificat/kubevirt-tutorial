@@ -26,3 +26,9 @@
     - kubevirt-ui-custom-manifests
     - kubevirt-operator-manifests
     - cdi-operator-manifests
+
+- name: Copy student materials
+  copy:
+    src: files/student-materials
+    dest: /home/{{ ansible_user }}/
+    owner: "{{ ansible_user }}"
