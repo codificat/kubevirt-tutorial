@@ -1,6 +1,14 @@
 ---
 - hosts: all
   become: true
+  vars:
+      kubelet_extra_args: "{{ KUBELET_EXTRA_ARGS | default('--cgroup-driver=systemd') }}"
+      # ansible user could be found on administrator/terraform/gcp/varfiles/opensouthcode19.tfvars
+      # lab_username
+      ansible_user: "kubevirt-user"
+      # tag_lab could be found on administrator/terraform/gcp/variables.tf
+      # gcp_instance_tag="kubevirtlab", take care, by default GCE adds tag_ as a preffix on the tag
+      tag_lab: "tag_kubevirtlab"
   roles:
     - common
     - kubernetes

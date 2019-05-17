@@ -12,49 +12,45 @@
     enabled: yes
     name: kubelet
 
-- name: Partition disks for local storage
-  parted:
-    device: "/dev/{{ item }}"
-    number: 1
-    state: present
-  loop:
-    - vdb
-    - vdc
-    - vdd
-    - vdf
-    - vde
-
-- name: Format disks for local storage
-  filesystem:
-    dev: /dev/{{ item }}1
-    fstype: xfs
-    opts: -L {{ item }}
-  loop:
-    - vdb
-    - vdc
-    - vdd
-    - vdf
-    - vde
-
 - name: Create base directory for local storage
   file:
     state: directory
     path: /mnt/storage
 
-- name: Mount disks for local storage
-  mount:
-    path: /mnt/storage/{{ item }}
-    src: LABEL={{ item }}
-    fstype: xfs
-    state: mounted
-  loop:
-    - vdb
-    - vdc
-    - vdd
-    - vdf
-    - vde
+- name: Summon Libvirt provider specific activities
+  import_tasks: libvirt.yml
+  when: "'QEMU' in ansible_system_vendor"
+
+- name: Summon GCE provider specific activities
+  import_tasks: gce.yml
+  when: "'Google' in ansible_system_vendor"
 
 - name: Create facts directory
   file:
     state: directory
     path: /etc/ansible/facts.d
+
+- name: Check Nested Virtualization
+  stat:
+    path: '/etc/modprobe.d/kvm.conf'
+  register: nested
+
+- block:
+  - name: Activate nested virtualization
+    lineinfile:
+      path: '/etc/modprobe.d/kvm.conf'
+      line: 'options kvm_intel nested=1'
+      create: yes
+
+  - name: Activate kvm_intel Kernel module
+    command: 'modprobe -r kvm_intel nested=1'
+  when: not nested.stat.exists
+
+- name: Add Laboratory nodes to masters group
+  add_host:
+      name: "{{ item }}"
+      hostname: "{{ item }}"
+      groups: 'masters'
+  with_items:
+      - "{{ groups[tag_lab] }}"
+

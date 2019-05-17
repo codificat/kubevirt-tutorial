@@ -17,7 +17,7 @@ This directory provides bases to deploy the lab.
 * Ansible
 * A virtual machine (with nested virtualization)
 
-## Installation
+## Installation on Libvirt
 
 ```shell
 git clone https://github.com/tripledes/kubevirt-tutorial
@@ -28,6 +28,23 @@ terraform init
 terraform plan -var-file varfiles/<yourvarsfile>.tf
 cd ../ansible
 ANSIBLE_ROLES_PATH=roles ansible-playbook -i inventories/<inventory> -u cloud --private-key <ssh-private-key> playbooks/kubernetes.yml
+```
+
+## Installation on GCE
+
+```shell
+git clone https://github.com/tripledes/kubevirt-tutorial
+cd kubevirt-tutorial
+git checkout sjr-refactor
+cd administrator/terraform
+terraform init -get -upgrade=true
+terraform plan -var-file varfiles/opensouthcode19.tfvars -refresh=true
+terraform apply -var-file varfiles/opensouthcode19.tfvars
+### If you want to debug it, just add this env var:
+TF_LOG=DEBUG terraform apply -var-file varfiles/opensouthcode19.tfvars -refresh=true
+###
+cd ../ansible
+ANSIBLE_ROLES_PATH=roles GCE_INI_PATH=~/.ansible/inventory/gce.ini ansible-playbook -i ~/.ansible/inventory/gce.py -l tag_kubevirtlab playbooks/kubernetes.yml
 ```
 
 ## Versions used
