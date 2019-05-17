@@ -10,7 +10,7 @@ $ less ~/student-materials/vm_datavolume.yml
 
 Now let's start this VM and we'll observe the image importing process before the VMI is created:
 
-```
+```console
 $ cd ~/student-materials/
 $ kubectl create -f vm_datavolume.yaml
 virtualmachine.kubevirt.io/vm2 created
