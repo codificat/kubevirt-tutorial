@@ -12,10 +12,11 @@ resource "google_compute_network" "default" {
 resource "google_compute_firewall" "default" {
     name         = "${var.gcp_firewall_rule_name}"
     description  = "Firewall rules for Kubevirt lab"
-    network      = "${google_compute_network.default.name}"
+    #network      = "${google_compute_network.default.name}"
+    network      = "default"
 
     allow {
-        protocol = "icmp"
+      protocol   = "icmp"
     }
 
     allow {
@@ -23,7 +24,7 @@ resource "google_compute_firewall" "default" {
       ports      = ["80", "443", "8443", "30300", "30000"]
     }
     
-    source_tags  = ["${var.gcp_instance_tag}"]
+    target_tags  = ["${var.gcp_instance_tag}"]
 }
 
 module "google-dns-managed-zone" {
