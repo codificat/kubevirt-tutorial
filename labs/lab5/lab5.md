@@ -24,6 +24,6 @@ The UI uses a graphical console for connecting to the VM, which can be also used
 
 This concludes this lab! Take your time exploring the UI and when your ready head to the next one!
 
-[Next Lab](../lab4/lab6.md)\
-[Previous Lab](../lab2/lab4.md)\
+[Next Lab](../lab6/lab6.md)\
+[Previous Lab](../lab4/lab4.md)\
 [Home](../../README.md)
