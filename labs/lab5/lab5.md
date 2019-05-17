@@ -14,6 +14,10 @@ Notice all the tabs we have available, *YAML*, *Consoles*, ... click on *Console
 
 ![VM1 VNC Console](images/kwebui-03.png)
 
+Click now on the *actions* button, it will present you with few options:
+
+![VM actions](images/kwebui-04.png)
+
 
 [Next Lab](../lab4/lab6.md)\
 [Previous Lab](../lab2/lab4.md)\
