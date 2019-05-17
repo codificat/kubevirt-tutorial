@@ -55,6 +55,46 @@ NAME   AGE     PHASE     IP            NODENAME
 vm1    3m49s   Running   10.244.0.22   sjr-kubemaster.deshome.net
 ```
 
+We can also use *kubectl* to check the virtual machine and its instance:
+
+```console
+$ kubectl get vm vm1
+NAME   AGE   RUNNING   VOLUME
+vm1    19m   true
+$ kubectl get vmi vm1
+NAME   AGE     PHASE     IP            NODENAME
+vm1    3m49s   Running   10.244.0.22   sjr-kubemaster.deshome.net
+```
+
+Using *virtctl* we can connect to the VM's console as follows:
+
+```console
+$ virtctl console vm1
+Successfully connected to vm1 console. The escape sequence is ^]
+
+Fedora 29 (Cloud Edition)
+Kernel 4.18.16-300.fc29.x86_64 on an x86_64 (ttyS0)
+
+vm1 login: fedora
+Password: fedora
+
+[fedora@vm1 ~]$ ping -c 1 google.com
+PING google.com (172.217.16.238) 56(84) bytes of data.
+64 bytes from mad08s04-in-f14.1e100.net (172.217.16.238): icmp_seq=1 ttl=54 time=22.1 ms
+
+--- google.com ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 22.098/22.098/22.098/0.000 ms
+[fedora@vm1 ~]$ exit
+
+Fedora 29 (Cloud Edition)
+Kernel 4.18.16-300.fc29.x86_64 on an x86_64 (ttyS0)
+
+vm1 login:
+```
+
+**NOTE**: To exit the console press *Ctrl+]*
+
 ## Recap
 
 **WRITE A SMALL SUMMARY OF WHAT HAVE JUST HAPPENED**
