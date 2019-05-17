@@ -1,28 +1,29 @@
 provider "google" {
     project = "${var.gcp_project}"
-    region = "${var.gcp_region}"
-    zone = "${var.gcp_zone}" 
+    region  = "${var.gcp_region}"
+    zone    = "${var.gcp_zone}" 
 }
 
 resource "google_compute_network" "default" {
-    name = "${var.gcp_network_name}"
+    name                    = "${var.gcp_network_name}"
+    auto_create_subnetworks = "false"
 }
 
 resource "google_compute_firewall" "default" {
-    name    = "${var.gcp_firewall_rule_name}"
-    description = "Firewall rules for Kubevirt lab"
-    network = "${google_compute_network.default.name}"
+    name         = "${var.gcp_firewall_rule_name}"
+    description  = "Firewall rules for Kubevirt lab"
+    network      = "${google_compute_network.default.name}"
 
     allow {
         protocol = "icmp"
     }
 
     allow {
-      protocol = "tcp"
-      ports    = ["80", "443", "8443", "30300", "30000"]
+      protocol   = "tcp"
+      ports      = ["80", "443", "8443", "30300", "30000"]
     }
     
-    source_tags = ["${var.gcp_instance_tag}"]
+    source_tags  = ["${var.gcp_instance_tag}"]
 }
 
 module "google-dns-managed-zone" {
