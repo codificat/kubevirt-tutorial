@@ -1,4 +1,8 @@
-## Use KubeVirt
+# Lab 6
+
+## Deploy a VM using a DataVolume
+
+Explore the VM manifests, note it uses a [DataVolume](https://kubevirt.io/user-guide/docs/latest/creating-virtual-machines/disks-and-volumes.html#datavolume)
 
 ### Create a Virtual Machine
 
