@@ -1,84 +1,66 @@
-# Networking with Multus
+## Kubevirt UI
 
-In this lab, we will Run Virtual machines with multiple nics by leveraging Multus integration.
+In this section, we will install and interact with vms using kubevirt dedicated UI.
 
-Multus CNI enables attaching multiple network interfaces to pods in Kubernetes and has integration with Kubevirt.
+You can then access it at `http://kubevirtlab-<number>.<domain>` and use it to:
 
-## Open vSwitch Configuration
+- stop/start/delete vms
+- create ones
+- access vm console through your browser
 
-Since we are using the ovs cni plugin, we need to configure dedicated Open vSwitch bridges.
+![kubevirt-ui](images/ui.png)
 
-Create a new bridge named `br1`:
+### Using the kubevirt web ui 
 
-```
-ovs-vsctl add-br br1
-```
+#### Create a Virtual Machine
 
-In a production setup, we would do the same on each of the cluster nodes and add a dedicated interface to the bridge.
+Click the `Create Virtual Machine` drop-down and select `Create with Wizard`
 
-## Create a Network Attachment Definition
+![create virtual machine wizard](images/new_vm_wizard.png)
 
-a `NetworkAttachmentDefinition` `config` section is a configuration for the CNI plugin where we indicate which bridges to associate to the pod/vm.
+In the `Basic Settings` configure with the following
 
-Create a new one, pointing to bridge `br1`:
+- Name: `vm3`
+- Namespace: `myproject`
+- Provision Source: `Container`
+- Container Image: `docker.io/kubevirt/cirros-registry-disk-demo:latest`
+- Operating System: `fedora29`
+- Flavor: `Custom`
+- Memory: `1`
+- CPUs: `1`
+- Workload Profile: `generic`
 
-```
-oc create -f ~/nad_br1.yml
-```
+![create virtual machine wizard](images/basic_settings.png)
 
-## Virtual Machine
+Click `Next >` until result and finish.
 
-For a virtual machine to use multiple interfaces, there are a couple of modifications to the VirtualMachine manifest that are required.
+#### Controlling the State of the VM
 
-- interfaces
-- networks
+To start the virtual machine click the cog and select `Start Virtual Machine`.
 
-## Create Virtual Machine
+![start vm](images/start_vm.png)
 
-Create two vms named fedora-multus-1 and fedora-multus-2, both with a secondary nic pointing to the previously created bridge/network attachment definition:
+Now click the virtual machine link `vm3`
 
-```
-oc create -f ~/vm_multus1.yml 
-oc create -f ~/vm_multus2.yml 
-```
+#### Virtual Machine Overview and Console
 
-In this case, we set running to *True* in the definition of those vms so they will launch with no further action
+![overview](images/overview.png)
 
-## Access Virtual Machines
+Click `Consoles` to view VNC.
 
-There are multiple ways to access the machine.
+![overview](images/vm_console.png)
 
-You can either use vnc from kubevirt-web-ui, `virtctl` or ssh via the cluster ip address.
+#### Associated Pods
 
-Locate the ips of the two vms:
+Clicking `Pods` will show the currently running pods for this namespace.
 
-```
-oc get vmi
-```
+![pods](images/pods.png)
 
-password is *fedora* as defined in the cloud-init section of the manifest.
+Then clicking the `virt-launcher-vm3-RANDOM` link will provide an overview
 
-```
-ssh fedora@<ip_listed_above>
-```
+![pods](images/pod_overview.png)
 
-Confirm that `eth1` is available:
-
-```
-[root@fedora-multus-1 ~]# ip a
-...OUTPUT...
-3: eth1: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
-    link/ether 20:37:cf:e0:ad:f1 brd ff:ff:ff:ff:ff:ff
-```
-
-## Confirm connectivity
-
-Through cloudinit, we also configured fedora-multus-1 vm to have ip 11.0.0.5 and fedora-multus-1 vm to have ip 11.0.0.6 so try to ping or ssh between them:
-
-```
-ping 11.0.0.5
-ping 11.0.0.6
-```
+This concludes this section of the lab.
 
 [Next Lab](../lab9/lab9.md)\
 [Previous Lab](../lab7/lab7.md)\

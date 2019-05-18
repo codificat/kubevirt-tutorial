@@ -101,6 +101,6 @@ vm1 login:
 
 This concludes this section of the lab.
 
-[Next Lab](../lab6/lab6.md)\
-[Previous Lab](../lab4/lab4.md)\
+[Next Lab](../lab5/lab5.md)\
+[Previous Lab](../lab3/lab3.md)\
 [Home](../../README.md)
