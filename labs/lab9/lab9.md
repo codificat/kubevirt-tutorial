@@ -5,11 +5,10 @@ Now that you have completed the lab, let's review what was covered here:
 * Deployed Kubevirt Using Kubevirt-Operator 
 * Deployed CDI Using CDI-Operator
 * Deployed Kubevirt-web-ui Using Kubevirt-web-ui-Operator 
-* Deployed an application on OpenShift.
-* Deployed and explored KubeVirt.
-* Deployed a virtual machine using Kubevirt.
+* Deployed a simple Virtual Machine on Kubevirt.
 * Accessed the virtual machine.
-* Deployed CDI and create a vm using it.
+* Explored KubeVirt UI.
+* Deployed a virtual machine using a DataVolume using CDI.
 * Create vms with multiple nics by using Multus.
 * Deployed and Use Kubevirt UI.
 
