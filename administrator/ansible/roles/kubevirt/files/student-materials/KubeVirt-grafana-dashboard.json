@@ -165,6 +165,7 @@
           "expr": "sum(increase(kubevirt_vm_vcpu_seconds[5m])) by (domain)",
           "format": "heatmap",
           "intervalFactor": 1,
+          "legendFormat": "{{domain}}",
           "refId": "A"
         }
       ],
@@ -610,5 +611,5 @@
   "timezone": "",
   "title": "KubeVirt",
   "uid": "zCQVcNZWk",
-  "version": 5
+  "version": 6
 }
