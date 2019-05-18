@@ -57,3 +57,12 @@
   with_items:
       - "{{ groups[tag_lab] }}"
   when: "'Google' in ansible_system_vendor"
+
+### Workaround for GCE, always gives an IP on network interfaces
+- name: Disable the eth1 interface
+  command: ifdown eth1
+  when: "'Google' in ansible_system_vendor"
+
+- name: Enable the eth1 interface
+  command: ifup eth1
+  when: "'Google' in ansible_system_vendor"
