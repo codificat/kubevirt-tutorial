@@ -13,11 +13,10 @@ We will use a dedicated public VM per student.
 ## Lab Overview
 
 * Deploy and explore KubeVirt
-* Deploy a virtual machine using Kubevirt
-* Access the virtual machine
-* Create a vm using persistent storage
+* Deploy a virtual machine using KubeVirt
+* Explore the KubeVirt web UI
+* Create a VM using persistent storage
 * Create a multi-homed VM using Multus
-* Explore the Kubevirt web UI
 * Explore metrics through Grafana
 
 ## Requirements
