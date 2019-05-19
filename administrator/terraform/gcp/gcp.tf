@@ -21,7 +21,7 @@ resource "google_compute_firewall" "default" {
 
     allow {
       protocol   = "tcp"
-      ports      = ["80", "443", "8443", "30300", "30000"]
+      ports      = ["80", "443", "8443", "30300", "30000", "30090"]
     }
     
     target_tags  = ["${var.gcp_instance_tag}"]
