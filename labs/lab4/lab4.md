@@ -2,6 +2,8 @@
 
 ## Deploy our first Virtual Machine
 
+To start with, we'll be deploying a VM that uses a [ContainerDisk](https://kubevirt.io/user-guide/docs/latest/creating-virtual-machines/disks-and-volumes.html#containerdisk). It won't use any of the available PVs, ContainerDisk use ephemeral disk space.
+
 ```console
 $ cd ~/student-materials
 $ kubectl config set-context $(kubectl config current-context) --namespace=default
@@ -9,15 +11,15 @@ $ kubectl create -f vm_containerdisk.yml
 virtualmachine.kubevirt.io/vm1 created
 ```
 
-Check what just happened:
+Check for the VM we just created:
 
 ```console
-$ kubectl get vm
+$ kubectl get vm vm1
 NAME   AGE   RUNNING   VOLUME
 vm1    24s   false
 ```
 
-Notice the *RUNNING* field, the VM is stopped. That's actually coming from its definition we just applied:
+Notice it's not running, that's actually coming from its definition we've just applied:
 
 ```yaml
 ...
@@ -26,14 +28,14 @@ spec:
 ...
 ```
 
-Let's use *virtctl* now to actually start our virtual machine:
+The *VirtualMachine* object is the definition of our VM, now we can instantiate it using *virtctl* as follows:
 
 ```console
 $ virtctl start vm1
 VM vm1 was scheduled to start
 ```
 
-A *virt-launcher* Pod should be starting, which will spawn the actual virtual machine:
+A *virt-launcher* Pod should be starting now, which will spawn the actual virtual machine instance (or VMI):
 
 ```console
 $ kubectl get pods -w
@@ -50,23 +52,13 @@ We can also use *kubectl* to check the virtual machine and its instance:
 $ kubectl get vm vm1
 NAME   AGE   RUNNING   VOLUME
 vm1    19m   true
+
 $ kubectl get vmi vm1
 NAME   AGE     PHASE     IP            NODENAME
 vm1    3m49s   Running   10.244.0.22   sjr-kubemaster.deshome.net
 ```
 
-We can also use *kubectl* to check the virtual machine and its instance:
-
-```console
-$ kubectl get vm vm1
-NAME   AGE   RUNNING   VOLUME
-vm1    19m   true
-$ kubectl get vmi vm1
-NAME   AGE     PHASE     IP            NODENAME
-vm1    3m49s   Running   10.244.0.22   sjr-kubemaster.deshome.net
-```
-
-Using *virtctl* we can connect to the VM's console as follows:
+Using *virtctl* we can connect to the VMI's console as follows:
 
 ```console
 $ virtctl console vm1
@@ -97,9 +89,13 @@ vm1 login:
 
 ## Recap
 
-**WRITE A SMALL SUMMARY OF WHAT HAVE JUST HAPPENED**
+* We've defined a *VirtualMachine* object on the cluster which didn't actually start the *vm1*
+* We've started the *vm1* using *virtctl*, which instantiated it creating the *VirtualMachineInstance* object
+  * *kubectl patch* could have also been used to start *vm1*
+* Finally, we've connected to the *vm1's* serial console using *virtctl*
 
-This concludes this section of the lab.
+
+This concludes this section of the lab, before heading off to the next lab, spend some time describing and exploring the objects this lab created on the cluster.
 
 [Next Lab](../lab5/lab5.md)\
 [Previous Lab](../lab3/lab3.md)\
