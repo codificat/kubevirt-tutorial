@@ -1,16 +1,18 @@
-## Kubevirt UI
+# Lab 7
 
-In this section, we will install and interact with vms using kubevirt dedicated UI.
+## Using the Kubevirt UI to interact with VMs
 
-You can then access it at `http://kubevirtlab-<number>.<domain>` and use it to:
+In this section, we will install and interact with VMs using KubeVirt's dedicated UI.
 
-- stop/start/delete vms
-- create ones
-- access vm console through your browser
+You can then access it at `http://kubevirtlab-<number>.<domain>:30000` and use it to:
+
+* stop/start/delete/... VMs
+* Create new ones
+* Access VM consoles through your browser
 
 ![kubevirt-ui](images/ui.png)
 
-### Using the kubevirt web ui 
+### Using the KubeVirt web UI 
 
 #### Create a Virtual Machine
 
@@ -20,15 +22,15 @@ Click the `Create Virtual Machine` drop-down and select `Create with Wizard`
 
 In the `Basic Settings` configure with the following
 
-- Name: `vm3`
-- Namespace: `myproject`
-- Provision Source: `Container`
-- Container Image: `docker.io/kubevirt/cirros-registry-disk-demo:latest`
-- Operating System: `fedora29`
-- Flavor: `Custom`
-- Memory: `1`
-- CPUs: `1`
-- Workload Profile: `generic`
+* Name: `vm3`
+* Namespace: `myproject`
+* Provision Source: `Container`
+* Container Image: `docker.io/kubevirt/cirros-registry-disk-demo:latest`
+* Operating System: `fedora29`
+* Flavor: `Custom`
+* Memory: `1`
+* CPUs: `1`
+* Workload Profile: `generic`
 
 ![create virtual machine wizard](images/basic_settings.png)
 
@@ -56,7 +58,7 @@ Clicking `Pods` will show the currently running pods for this namespace.
 
 ![pods](images/pods.png)
 
-Then clicking the `virt-launcher-vm3-RANDOM` link will provide an overview
+Then clicking the `virt-launcher-vm3-RANDOM` link will provide an overview.
 
 ![pods](images/pod_overview.png)
 

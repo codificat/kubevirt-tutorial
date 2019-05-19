@@ -1,6 +1,6 @@
 # Lab 3
 
-## Lab overview
+## Deploy KubeVirt/CDI/UI
 
 In this section we're going to deploy the following three components:
 

@@ -1,4 +1,4 @@
-# Lab 5
+# Lab 6
 
 ## Exploring the KubeVirt UI
 
@@ -6,7 +6,7 @@ Using your browser, head to *http://<your_gcp_instance_hostname>:30000* and you'
 
 ![Cluster status page](images/kwebui-01.png)
 
-On the left side navigation bar, click on *Workloads* and then *VirtualMachines*, we'll be presented with a view of the defined VMs, click on the VM1 to open up its details.
+On the left side navigation bar, click on *Workloads* and then *VirtualMachines*, we'll be presented with a view of the defined VMs in the cluster, click on the *vm1* to open up its details.
 
 ![VM1 details](images/kwebui-02.png)
 
@@ -22,8 +22,19 @@ We can interact with our VM from the UI as well, note the *Migrate* action avail
 
 The UI uses a graphical console for connecting to the VM, which can be also used from *virtctl* using the *vnc* subcommand. Note that it requires to have `remote-viewer` installed and it's out of the scope of this lab.
 
+Now let's get back clicking on *Workloads*, *VirtualMachines* and review the details for *vm2*, take a close look to its disks:
+
+![VM2 storage details](images/kwebui-05.png)
+
+To have more details, go to the *Storage* section and click on *Persistent Volume Claims*, we'll be presented with the summary of *PVCs* on the cluster, most likely one, *vm2-dv*, open it up:
+
+![vm2-dv details](images/kwebui-06.png)
+
+Here we can see its owner, the *DataVolume vm2-dv* and the physical volume attached to this claim, the *local-pv-6035a584* *PV*.
+
+
 This concludes this lab! Take your time exploring the UI and when your ready head to the next one!
 
-[Next Lab](../lab6/lab6.md)\
-[Previous Lab](../lab4/lab4.md)\
+[Next Lab](../lab7/lab7.md)\
+[Previous Lab](../lab5/lab5.md)\
 [Home](../../README.md)
