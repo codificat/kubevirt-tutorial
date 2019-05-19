@@ -1,6 +1,6 @@
 # Lab 8
 
-## Networking with Multus
+## Deploy a multi-homed VM using Multus
 
 In this lab, we will Run Virtual machines with multiple nics by leveraging Multus integration.
 

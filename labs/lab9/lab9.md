@@ -1,6 +1,8 @@
 # Lab 9
 
-## Exploring metrics from PromUI
+## Exploring KubeVirt metrics
+
+### Using the PromUI
 
 Using your brower, head to head to your node's hostname on port 30090 to find the PromUI.
 
@@ -40,7 +42,7 @@ Now let's check the API metrics using *rest_client_requests_total{job="kubevirt-
 
 Again, these will tend to be ever-growing numbers, thus PromQL functions are needed. Note the information that Promtheus gives us, like code, Pod, method...we could make use of those to create monitoring dashboards and alterting.
 
-## Exploring metrics from Grafana
+### Using Grafana
 
 In the student materials (*~/student-materials*) you'll find a [Grafana](https://grafana.org) dashboard we've prepared for you all, so let's import it and see what it shows:
 

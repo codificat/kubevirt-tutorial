@@ -1,6 +1,6 @@
 # Lab 7
 
-## Interacting with the Kubevirt web UI
+## Using the Kubevirt UI to interact with VMs
 
 In this section, we will install and interact with VMs using KubeVirt's dedicated UI.
 
