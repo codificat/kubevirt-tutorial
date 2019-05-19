@@ -30,7 +30,7 @@ To have more details, go to the *Storage* section and click on *Persistent Volum
 
 ![vm2-dv details](images/kwebui-06.png)
 
-Here we can see its owner, the *DataVolume vm2-dv* and the physical volume attached to the claim, in this case *local-pv-6035a584*.
+Here we can see its owner, the *DataVolume vm2-dv* and the physical volume attached to this claim, the *local-pv-6035a584* *PV*.
 
 
 This concludes this lab! Take your time exploring the UI and when your ready head to the next one!
