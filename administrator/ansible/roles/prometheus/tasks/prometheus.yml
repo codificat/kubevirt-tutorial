@@ -15,7 +15,7 @@
   register: promop_deployment
 
 - name: Install Prometheus
-  command: ~/.local/bin/helm install --name kubevirtlab --wait --set grafana.adminPassword=redhat123 --namespace prometheus stable/prometheus-operator
+  command: ~/.local/bin/helm install --name kubevirtlab --wait --set grafana.adminPassword=kubevirtlab123 --set prometheus.service.type=NodePort --namespace prometheus stable/prometheus-operator
   when: not (promop_deployment['resources'] | length > 0)
 
 - name: Expose grafana on a nodeport
