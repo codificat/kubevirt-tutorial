@@ -61,6 +61,15 @@ replicaset.apps/virt-controller-76765f49f9   2         2         2       99m
 replicaset.apps/virt-operator-5ddb4674b9     2         2         2       101m
 ```
 
+Let's verify we can reach KubeVirt API:
+
+```console
+$ virtctl version
+
+Client Version: version.Info{GitVersion:"v0.17.0", GitCommit:"c0f960702dce718419a767f3913669f539229ff0", GitTreeState:"clean", BuildDate:"2019-05-05T08:09:14Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{GitVersion:"v0.17.0", GitCommit:"a067696ed6c25b0eab9dfcd01bbdc045f500f8ca", GitTreeState:"clean", BuildDate:"2019-05-06T14:58:11Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+```
+
 ## Install the CDI operator
 
 ```console
@@ -130,14 +139,25 @@ service/kubevirt-web-ui   NodePort   10.96.35.132   <none>        9000:30000/TCP
 
 **NOTE**: Pay special attention to the kubevirt-web-ui service, the UI should be available on your node's assigned hostname at port 30000.
 
-Let's verify we can reach KubeVirt API:
+## Enable Prometheus to scrap KubeVirt metrics
 
 ```console
-$ virtctl version
-
-Client Version: version.Info{GitVersion:"v0.17.0", GitCommit:"c0f960702dce718419a767f3913669f539229ff0", GitTreeState:"clean", BuildDate:"2019-05-05T08:09:14Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
-Server Version: version.Info{GitVersion:"v0.17.0", GitCommit:"a067696ed6c25b0eab9dfcd01bbdc045f500f8ca", GitTreeState:"clean", BuildDate:"2019-05-06T14:58:11Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+$ cd ~/student-materials
+$ kubectl create -f kubevirt-servicemonitor.yml
+servicemonitor.monitoring.coreos.com/kubevirtlab-kubevirt created
 ```
+
+## Recap
+
+Let's summarize what happened on this lab:
+
+* We've installed both KubeVirt and CDI operators:
+  * Which enabled us to deploy instances of both products.
+  * Created the necessary CRDs to manage VMs and storage.
+* The KubeVirt Web UI is also running and exposed using a *NodePort* type service, on port *30000/TCP*.
+* We tested the KubeVirt API is available using *virtctl*, the CLI tool for interacting with KubeVirt VMs.
+* Finally, we've deployed a *ServiceMonitor* object to tell Prometheus to scrap the KubeVirt components, including the VMs we'll be running in the subsequent labs.
+
 
 This concludes this section, please head to the next one!
 
