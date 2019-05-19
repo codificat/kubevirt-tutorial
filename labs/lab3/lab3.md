@@ -24,8 +24,9 @@ $ kubectl wait deployment virt-operator --for condition=available
 deployment.extensions/virt-operator condition met
 
 $ kubectl create -f kubevirt-cr.yaml
-$ kubectl wait deployment -l app.kubernetes.io/managed-by=kubevirt-operator --for condition=available
+$ kubectl wait deployment virt-api --for condition=available
 deployment.extensions/virt-api condition met
+$ kubectl wait deployment virt-controller --for condition=available
 deployment.extensions/virt-controller condition met
 ```
 
