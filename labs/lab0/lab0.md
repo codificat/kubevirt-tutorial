@@ -1,6 +1,8 @@
-# Overview
+# Lab 0
 
-## Abstract
+## Overview
+
+### Abstract
 
 KubeVirt is a virtual machine management add-on for Kubernetes. The aim is to provide a common ground for virtualization solutions on top of Kubernetes.
 
@@ -10,7 +12,7 @@ The goal is to show you how to run KubeVirt locally and get a bit familiar with 
 
 We will use a dedicated public VM per student.
 
-## Lab Overview
+### Lab Overview
 
 * Deploy and explore KubeVirt
 * Deploy a virtual machine using KubeVirt
@@ -19,12 +21,12 @@ We will use a dedicated public VM per student.
 * Explore the KubeVirt web UI
 * Explore metrics through Grafana
 
-## Requirements
+### Requirements
 
 - Laptop with a modern browser for accessing the UIs
 - SSH client
 
-## Relevant Links
+### Relevant Links
 
 - [KubeVirt](http://kubevirt.io/)
 - [KubeVirt user guide](https://kubevirt.io/user-guide/docs/latest/welcome/index.html)
