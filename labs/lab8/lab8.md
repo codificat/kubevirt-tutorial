@@ -1,4 +1,6 @@
-# Networking with Multus
+# Lab 8
+
+## Networking with Multus
 
 In this lab, we will Run Virtual machines with multiple nics by leveraging Multus integration.
 
@@ -6,7 +8,7 @@ Multus CNI enables attaching multiple network interfaces to pods in Kubernetes a
 
 **WARN: We've introduced errors in the laboratory to avoid copy/paste without understanding :), enjoy!!**
 
-## Open vSwitch Configuration
+### Open vSwitch Configuration
 
 Since we are using the ovs cni plugin, we need to configure dedicated Open vSwitch bridges.
 
@@ -37,7 +39,7 @@ Output
 
 In a production setup, we would do the same on each of the cluster nodes and add a dedicated interface to the bridge.
 
-## Create a Network Attachment Definition
+### Create a Network Attachment Definition
 
 a `NetworkAttachmentDefinition` `config` section is a configuration for the CNI plugin where we indicate which bridges to associate to the pod/vm.
 
@@ -61,14 +63,14 @@ Create a new one, pointing to bridge `br1`:
 kubectl create -f ~/student-materials/multus_nad_br1.yml
 ```
 
-## Virtual Machine
+### Virtual Machine
 
 For a virtual machine to use multiple interfaces, there are a couple of modifications to the VirtualMachine manifest that are required.
 
 - interfaces
 - networks
 
-## Create Virtual Machine
+### Create Virtual Machine
 
 Create two vms named **fedora-multus-1** and **fedora-multus-2**, both with a secondary nic pointing to the previously created bridge/network attachment definition:
 
@@ -79,7 +81,7 @@ kubectl create -f ~/student-materials/vm_multus2.yml
 
 In this case, we set running to *True* in the definition of those vms so they will launch with no further action
 
-## Access Virtual Machines
+### Access Virtual Machines
 
 There are multiple ways to access the machine.
 
@@ -107,7 +109,7 @@ Confirm that `eth1` is available:
     link/ether 20:37:cf:e0:ad:f1 brd ff:ff:ff:ff:ff:ff
 ```
 
-## Confirm connectivity
+### Confirm connectivity
 
 Through cloudinit, we also configured fedora-multus-1 vm to have ip 11.0.0.5 and fedora-multus-1 vm to have ip 11.0.0.6 so try to ping or ssh between them:
 
