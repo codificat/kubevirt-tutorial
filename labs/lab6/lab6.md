@@ -35,6 +35,6 @@ Here we can see its owner, the *DataVolume vm2-dv* and the physical volume attac
 
 This concludes this lab! Take your time exploring the UI and when your ready head to the next one!
 
-[Next Lab](../lab6/lab7.md)\
-[Previous Lab](../lab4/lab5.md)\
+[Next Lab](../lab7/lab7.md)\
+[Previous Lab](../lab5/lab5.md)\
 [Home](../../README.md)
