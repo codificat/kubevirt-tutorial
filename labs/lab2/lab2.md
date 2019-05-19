@@ -1,45 +1,45 @@
 # Lab 2
 
-## Review Kubernetes Environment
+## Review Kubernetes environment
 
 For the sake of time, some of the required setup has already been taken care of on your instance.
 
 The following was done as part of the deployment:
 
-- Install Kubernetes prerequisites
-- Deploy Kubernetes using *kubeadm*
-- Deploy OVS CNI
-- Deploy local volumes provisioner
-- Checked out the HyperConverged Cluster Operator at $HOME
+* Installed Kubernetes prerequisites
+* Deployed Kubernetes using *kubeadm*
+* Deployed all the networking components:
+  * Deployed [Flannel](https://coreos.com/flannel/docs/latest/)
+  * Deployed [Multus](https://01.org/kubernetes/building-blocks/multus-cni)
+  * Deployed [OVS CNI](https://github.com/kubevirt/ovs-cni)
+* Deployed [local volumes provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner)
+* Deployed [Prometheus Operator](https://github.com/coreos/prometheus-operator)
+* Lab manifests have been copied over to your $HOME
 
-Let's ask for a cluster status:
+Let's ask for the cluster status:
 
-```shell
-kubectl version
-```
+```console
+$ kubectl version
 
-Output should be similar to the following:
-
-```shell
 Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.1", GitCommit:"b7394102d6ef778017f2ca4046abbaa23b88c290", GitTreeState:"clean", BuildDate:"2019-04-08T17:11:31Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
 Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.1", GitCommit:"b7394102d6ef778017f2ca4046abbaa23b88c290", GitTreeState:"clean", BuildDate:"2019-04-08T17:02:58Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
 ```
 
 Now let's check the physical volumes are ready and available:
 
-```shell
-kubectl get pv
+```console
+$ kubectl get pv
+
 NAME                CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
-local-pv-234582fe   10229Mi    RWO            Delete           Available           local-volumes            2d
-local-pv-5d33c489   10229Mi    RWO            Delete           Available           local-volumes            2d
-local-pv-6035a584   10229Mi    RWO            Delete           Available           local-volumes            2d
-local-pv-a56cebb5   10229Mi    RWO            Delete           Available           local-volumes            2d
-local-pv-ba09b443   10229Mi    RWO            Delete           Available           local-volumes            2d
+local-pv-234582fe       5Gi    RWO            Delete           Available           local-volumes            2d
+local-pv-5d33c489       5Gi    RWO            Delete           Available           local-volumes            2d
+local-pv-6035a584       5Gi    RWO            Delete           Available           local-volumes            2d
+local-pv-a56cebb5       5Gi    RWO            Delete           Available           local-volumes            2d
 ```
 
 And finally, let's check that Prometheus is running and Grafana is exposed:
 
-```shell
+```console
 NAME                                                         READY   STATUS    RESTARTS   AGE
 pod/alertmanager-kubevirtlab-prometheus-ope-alertmanager-0   2/2     Running   0          2d
 pod/kubevirtlab-grafana-bf9db4bd9-r8pmt                      2/2     Running   0          2d
@@ -56,7 +56,7 @@ service/kubevirtlab-kube-state-metrics            ClusterIP   10.101.96.232    <
 service/kubevirtlab-prometheus-node-exporter      ClusterIP   10.99.86.74      <none>        9100/TCP            2d
 service/kubevirtlab-prometheus-ope-alertmanager   ClusterIP   10.105.253.180   <none>        9093/TCP            2d
 service/kubevirtlab-prometheus-ope-operator       ClusterIP   10.109.209.37    <none>        8080/TCP            2d
-service/kubevirtlab-prometheus-ope-prometheus     ClusterIP   10.109.224.249   <none>        9090/TCP            2d
+service/kubevirtlab-prometheus-ope-prometheus     NodePort    10.109.224.249   <none>        9090:30090/TCP      2d
 service/prometheus-operated                       ClusterIP   None             <none>        9090/TCP            2d
 
 NAME                                                  DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
