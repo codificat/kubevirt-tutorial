@@ -138,6 +138,6 @@ Pay special attention to the *Annotations* section where CDI introduces interest
 This concludes this section of the lab.
 
 
-[Next Lab](../lab7/lab6.md)\
-[Previous Lab](../lab5/lab4.md)\
+[Next Lab](../lab6/lab6.md)\
+[Previous Lab](../lab5/lab5.md)\
 [Home](../../README.md)
