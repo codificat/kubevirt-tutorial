@@ -38,7 +38,7 @@ Now let's check the API metrics using *rest_client_requests_total{job="kubevirt-
 
 ![PromUI API metrics](images/promui-03.png)
 
-Again, these will tend to be ever growing numbers, thus PromQL functions are needed. Note the information that Promtheus gives us, like code, Pod, method...we could make use of those to create monitoring dashboards and alterting.
+Again, these will tend to be ever-growing numbers, thus PromQL functions are needed. Note the information that Promtheus gives us, like code, Pod, method...we could make use of those to create monitoring dashboards and alterting.
 
 ## Exploring metrics from Grafana
 
