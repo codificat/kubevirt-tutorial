@@ -34,7 +34,7 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 5Gi
+            storage: 4Gi
         storageClassName: local-volumes
       source:
         http:
