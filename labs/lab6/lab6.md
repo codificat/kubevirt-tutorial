@@ -1,5 +1,31 @@
 # Lab 6
 
+## Install the KubeVirt Web UI
+
+```console
+$ cd ~/kubevirt/kubevirt-ui-custom-manifests
+$ kubectl config set-context $(kubectl config current-context) --namespace=kubevirt
+$ kubectl create -f kubevirt_ui.yml
+$ kubectl wait pod -l app=kubevirt-web-ui --for condition=Ready --timeout=180s
+pod/kubevirt-web-ui-qmpwl condition met
+```
+
+Check the three resources deployed for the Web UI:
+
+```console
+$ kubectl get all -l app=kubevirt-web-ui
+NAME                        READY   STATUS    RESTARTS   AGE
+pod/kubevirt-web-ui-qmpwl   1/1     Running   0          78m
+
+NAME                                    DESIRED   CURRENT   READY   AGE
+replicationcontroller/kubevirt-web-ui   1         1         1       78m
+
+NAME                      TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+service/kubevirt-web-ui   NodePort   10.96.35.132   <none>        9000:30000/TCP   78m
+```
+
+**NOTE**: Pay special attention to the kubevirt-web-ui service, the UI should be available on your node's assigned hostname at port 30000.
+
 ## Exploring the KubeVirt UI
 
 Using your browser, head to *http://<your_gcp_instance_hostname>:30000* and you'll be greeted by an status page showing the health of the cluster and a stream of events.

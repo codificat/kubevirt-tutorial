@@ -114,32 +114,6 @@ replicaset.apps/cdi-operator-5f58bbbbcf     1         1         1       87m
 replicaset.apps/cdi-uploadproxy-cddbb95b    1         1         1       85m
 ```
 
-## Install the KubeVirt Web UI
-
-```console
-$ cd ~/kubevirt/kubevirt-ui-custom-manifests
-$ kubectl config set-context $(kubectl config current-context) --namespace=kubevirt
-$ kubectl create -f kubevirt_ui.yml
-$ kubectl wait pod -l app=kubevirt-web-ui --for condition=Ready --timeout=180s
-pod/kubevirt-web-ui-qmpwl condition met
-```
-
-Check the three resources deployed for the Web UI:
-
-```console
-$ kubectl get all -l app=kubevirt-web-ui
-NAME                        READY   STATUS    RESTARTS   AGE
-pod/kubevirt-web-ui-qmpwl   1/1     Running   0          78m
-
-NAME                                    DESIRED   CURRENT   READY   AGE
-replicationcontroller/kubevirt-web-ui   1         1         1       78m
-
-NAME                      TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-service/kubevirt-web-ui   NodePort   10.96.35.132   <none>        9000:30000/TCP   78m
-```
-
-**NOTE**: Pay special attention to the kubevirt-web-ui service, the UI should be available on your node's assigned hostname at port 30000.
-
 ## Enable Prometheus to scrap KubeVirt metrics
 
 ```console
@@ -155,7 +129,6 @@ Let's summarize what happened on this lab:
 * We've installed both KubeVirt and CDI operators:
   * Which enabled us to deploy instances of both products.
   * Created the necessary CRDs to manage VMs and storage.
-* The KubeVirt Web UI is also running and exposed using a *NodePort* type service, on port *30000/TCP*.
 * We tested the KubeVirt API is available using *virtctl*, the CLI tool for interacting with KubeVirt VMs.
 * Finally, we've deployed a *ServiceMonitor* object to tell Prometheus to scrap the KubeVirt components, including the VMs we'll be running in the subsequent labs.
 
