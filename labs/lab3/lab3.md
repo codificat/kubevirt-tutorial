@@ -11,10 +11,9 @@ In this section we're going to deploy the following three components:
 * [KubeVirt Web UI](https://github.com/kubevirt/web-ui)
   * Provides a graphical environment to manage VM based workloads
 
-
 ## Install the KubeVirt Operator
 
-Starting with the KubeVirt Operator, being connected to your assigned instance, execute the following steps.
+We're going to start with the KubeVirt Operator, being connected to your assigned instance, execute the following steps:
 
 ```console
 $ cd ~/kubevirt/kubevirt-operator-manifests
@@ -62,7 +61,7 @@ replicaset.apps/virt-controller-76765f49f9   2         2         2       99m
 replicaset.apps/virt-operator-5ddb4674b9     2         2         2       101m
 ```
 
-Let's verify we can reach KubeVirt API:
+Let's verify the KubeVirt API is reachable:
 
 ```console
 $ virtctl version
@@ -133,7 +132,7 @@ Let's summarize what happened on this lab:
 * Finally, we've deployed a *ServiceMonitor* object to tell Prometheus to scrap the KubeVirt components, including the VMs we'll be running in the subsequent labs.
 
 
-This concludes this section, please head to the next one!
+This concludes this section, please head off to the next one!
 
 [Next Lab](../lab4/lab4.md)\
 [Previous Lab](../lab2/lab2.md)\
