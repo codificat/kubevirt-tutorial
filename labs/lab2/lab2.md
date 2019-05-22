@@ -86,6 +86,11 @@ Notice that both *PromUI* and *Grafana* have been exposed on the node, ports 300
   * Username: admin
   * Password: kubevirtlab123
 
+## Recap
+
+* We've reviewed the available PVs in the cluster that we'll use later on
+* We've reviewed the Prometheus deployment, Grafana and PromUI services exposed on the node.
+
 
 This concludes this section of the lab.
 
