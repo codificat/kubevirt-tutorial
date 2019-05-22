@@ -10,7 +10,7 @@ This lab is designed to accommodate many students. As a result, each student wil
 
 No GCP knowledge is required.
 
-The naming convention for the lab VMs is: **student\<number\>**.cnvlab.gce.sysdeseng.com
+The naming convention for the lab VMs is: **kubevirtlab-\<number\>**.gce.sexylinux.net
 
 You will be assigned a number by the instructor.
 
@@ -23,21 +23,21 @@ chmod 600 cnv_rsa
 
 ### Connecting to your Instance
 
-This lab should be performed on **YOUR ASSIGNED INSTANCE** as `cloud` user unless otherwise instructed.
+This lab should be performed on **YOUR ASSIGNED INSTANCE** as `kubevirt-user` user unless otherwise instructed.
 
 **_NOTE_**: Please be respectful and only connect to your assigned instance. Every instance for this lab uses the same public key so you could accidentally connect to the wrong system. If you have any issues, please inform an instructor.
 
 ```
-ssh -i cnv_rsa cloud@student<number>.cnvlab.gce.sysdeseng.com
+ssh -i cnv_rsa kubevirt-user@kubevirtlab-<number>.gce.sexylinux.net
 ```
 
 The output should be something similar to:
 
 ```
-The authenticity of host 'student002.cnvlab.gce.sysdeseng.com (35.188.64.157)' can't be established.
+The authenticity of host 'kubevirtlab-2.gce.sexylinux.net (35.188.64.157)' can't be established.
 ECDSA key fingerprint is SHA256:36+hPGyR9ZxYRRfMngif8PXLR1yoVFCGZ1kylpNE8Sk.
 Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added 'student002.cnvlab.gce.sysdeseng.com,35.188.64.157' (ECDSA) to the list of known hosts.
+Warning: Permanently added 'kubevirtlab-2.gce.sexylinux.net,35.188.64.157' (ECDSA) to the list of known hosts.
 ```
 
 This means the host you are about to connect is not in the *known_hosts* list. Just accept the fingerprint in order to connect to the instance.
