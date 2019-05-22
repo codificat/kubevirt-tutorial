@@ -31,10 +31,10 @@ Now let's check the physical volumes are ready and available:
 $ kubectl get pv
 
 NAME                CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
-local-pv-234582fe       5Gi    RWO            Delete           Available           local-volumes            2d
-local-pv-5d33c489       5Gi    RWO            Delete           Available           local-volumes            2d
-local-pv-6035a584       5Gi    RWO            Delete           Available           local-volumes            2d
-local-pv-a56cebb5       5Gi    RWO            Delete           Available           local-volumes            2d
+local-pv-234582fe   5109Mi     RWO            Delete           Available           local-volumes            2d
+local-pv-5d33c489   5109Mi     RWO            Delete           Available           local-volumes            2d
+local-pv-6035a584   5109Mi     RWO            Delete           Available           local-volumes            2d
+local-pv-a56cebb5   5109Mi     RWO            Delete           Available           local-volumes            2d
 ```
 
 And finally, let's check that Prometheus is running and Grafana is exposed:
@@ -76,6 +76,16 @@ NAME                                                                    READY   
 statefulset.apps/alertmanager-kubevirtlab-prometheus-ope-alertmanager   1/1     2d
 statefulset.apps/prometheus-kubevirtlab-prometheus-ope-prometheus       1/1     2d
 ```
+
+Notice that both *PromUI* and *Grafana* have been exposed on the node, ports 30090/tcp and 30300/tcp, both can be accessed with the following details:
+
+* PromUI
+  * http://kubevirtlab-<number>.gce.sexylinux.net:30090
+* Grafana
+  * http://kubevirtlab-<number>.gce.sexylinux.net:30300
+  * Username: admin
+  * Password: kubevirtlab123
+
 
 This concludes this section of the lab.
 
