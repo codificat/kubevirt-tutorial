@@ -19,4 +19,3 @@ Thanks for joining us today and don't forget to submit that PR if you find issue
 
 [Previous Lab](../lab9/lab9.md)\
 [Home](../../README.md)
-

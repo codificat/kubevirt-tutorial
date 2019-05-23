@@ -2,30 +2,32 @@
 
 ## Review Kubernetes environment
 
-For the sake of time, some of the required setup has already been taken care of on your instance.
-
-The following was done as part of the deployment:
+For the sake of time, some of the required setup have already been taken care of. The following was done as part of the deployment:
 
 * Installed Kubernetes prerequisites
-* Deployed Kubernetes using *kubeadm*
+* Deployed Kubernetes using *kubeadm*, it's single node cluster
 * Deployed all the networking components:
   * Deployed [Flannel](https://coreos.com/flannel/docs/latest/)
-  * Deployed [Multus](https://01.org/kubernetes/building-blocks/multus-cni)
+  * Deployed [Multus CNI](https://01.org/kubernetes/building-blocks/multus-cni)
   * Deployed [OVS CNI](https://github.com/kubevirt/ovs-cni)
 * Deployed [local volumes provisioner](https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner)
 * Deployed [Prometheus Operator](https://github.com/coreos/prometheus-operator)
-* Lab manifests have been copied over to your $HOME
+  * [Prometheus](https://prometheus.io)  with its components
+  * [Grafana](https://grafana.com)
+* Lab manifests have been copied over to your *$HOME/student-materials*
 
-Let's ask for the cluster status:
+### Verify the cluster
+
+Let's ask the cluster for its status:
 
 ```console
 $ kubectl version
 
-Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.1", GitCommit:"b7394102d6ef778017f2ca4046abbaa23b88c290", GitTreeState:"clean", BuildDate:"2019-04-08T17:11:31Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
-Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.1", GitCommit:"b7394102d6ef778017f2ca4046abbaa23b88c290", GitTreeState:"clean", BuildDate:"2019-04-08T17:02:58Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
+Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.2", GitCommit:"66049e3b21efe110454d67df4fa62b08ea79a19b", GitTreeState:"clean", BuildDate:"2019-05-16T16:23:09Z", GoVersion:"go1.12.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.2", GitCommit:"66049e3b21efe110454d67df4fa62b08ea79a19b", GitTreeState:"clean", BuildDate:"2019-05-16T16:14:56Z", GoVersion:"go1.12.5", Compiler:"gc", Platform:"linux/amd64"}
 ```
 
-Now let's check the physical volumes are ready and available:
+Now let's check that the physical volumes are ready and available:
 
 ```console
 $ kubectl get pv
@@ -37,7 +39,7 @@ local-pv-6035a584   5109Mi     RWO            Delete           Available        
 local-pv-a56cebb5   5109Mi     RWO            Delete           Available           local-volumes            2d
 ```
 
-And finally, let's check that Prometheus is running and Grafana is exposed:
+And finally, let's check that Prometheus and Grafana are running and exposed:
 
 ```console
 NAME                                                         READY   STATUS    RESTARTS   AGE
@@ -77,7 +79,7 @@ statefulset.apps/alertmanager-kubevirtlab-prometheus-ope-alertmanager   1/1     
 statefulset.apps/prometheus-kubevirtlab-prometheus-ope-prometheus       1/1     2d
 ```
 
-Notice that both *PromUI* and *Grafana* have been exposed on the node, ports 30090/tcp and 30300/tcp, both can be accessed with the following details:
+Notice that both *PromUI* and *Grafana* have been exposed on the node's ports 30090/tcp and 30300/tcp, both can be accessed with the following details:
 
 * PromUI
   * http://kubevirtlab-<number>.gce.sexylinux.net:30090
@@ -89,8 +91,7 @@ Notice that both *PromUI* and *Grafana* have been exposed on the node, ports 300
 ## Recap
 
 * We've reviewed the available PVs in the cluster that we'll use later on
-* We've reviewed the Prometheus deployment, Grafana and PromUI services exposed on the node.
-
+* We've reviewed the Prometheus deployment, Grafana and PromUI services exposed on the node
 
 This concludes this section of the lab.
 

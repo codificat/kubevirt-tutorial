@@ -25,7 +25,7 @@ In the `Basic Settings` configure with the following
 * Name: `vm3`
 * Namespace: `myproject`
 * Provision Source: `Container`
-* Container Image: `docker.io/kubevirt/cirros-registry-disk-demo:latest`
+* Container Image: `docker.io/kubevirt/cirros-container-disk-demo:latest`
 * Operating System: `fedora29`
 * Flavor: `Custom`
 * Memory: `1`
@@ -48,7 +48,7 @@ Now click the virtual machine link `vm3`
 
 ![overview](images/overview.png)
 
-Click `Consoles` to view VNC.
+Click *Consoles* to view graphical (VNC) console.
 
 ![overview](images/vm_console.png)
 

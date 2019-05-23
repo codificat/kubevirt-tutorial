@@ -2,7 +2,7 @@
 
 ## Deploy our first Virtual Machine
 
-To start with, we'll be deploying a VM that uses a [ContainerDisk](https://kubevirt.io/user-guide/docs/latest/creating-virtual-machines/disks-and-volumes.html#containerdisk). It won't use any of the available PVs, ContainerDisk use ephemeral disk space.
+To start with, we'll be deploying a VM that uses a [ContainerDisk](https://kubevirt.io/user-guide/docs/latest/creating-virtual-machines/disks-and-volumes.html#containerdisk). It won't use any of the available PVs, ContainerDisk based VMs are ephemeral.
 
 ```console
 $ cd ~/student-materials
@@ -19,7 +19,7 @@ NAME   AGE   RUNNING   VOLUME
 vm1    24s   false
 ```
 
-Notice it's not running, that's actually coming from its definition we've just applied:
+Notice it's not running, in the YAML definition we can find the following block:
 
 ```yaml
 ...
@@ -28,7 +28,7 @@ spec:
 ...
 ```
 
-The *VirtualMachine* object is the definition of our VM, now we can instantiate it using *virtctl* as follows:
+The *VirtualMachine* object is the definition of our VM, but it's not instantiated, let's do so with *virtctl* as follows:
 
 ```console
 $ virtctl start vm1
@@ -84,12 +84,14 @@ Kernel 4.18.16-300.fc29.x86_64 on an x86_64 (ttyS0)
 
 vm1 login:
 ```
+There is also a graphical console for connecting to the VMs, using the *vnc* subcommand instead of *console*. Note that it requires you to have *remote-viewer* installed and it's out of the scope of this lab.
+
 
 **NOTE**: To exit the console press *Ctrl+]*
 
 ## Recap
 
-* We've defined a *VirtualMachine* object on the cluster which didn't actually start the *vm1*
+* We've defined a *VirtualMachine* object on the cluster which didn't actually instantiate the *vm1*
 * We've started the *vm1* using *virtctl*, which instantiated it creating the *VirtualMachineInstance* object
   * *kubectl patch* could have also been used to start *vm1*
 * Finally, we've connected to the *vm1's* serial console using *virtctl*
