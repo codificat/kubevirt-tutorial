@@ -14,6 +14,7 @@ Now let's start this VM and we'll observe the image importing process before the
 $ cd ~/student-materials/
 $ kubectl create -f vm_datavolume.yaml
 virtualmachine.kubevirt.io/vm2 created
+
 $ kubectl logs -f cdi.kubevirt.io/storage.import.importPvcName=vm2-dv
 I0517 14:43:45.670580       1 importer.go:58] Starting importer
 I0517 14:43:45.670866       1 importer.go:100] begin import process
