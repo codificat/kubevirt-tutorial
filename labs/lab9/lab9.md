@@ -50,7 +50,7 @@ In the student materials (*~/student-materials*) you'll find a [Grafana](https:/
 $ wget https://raw.githubusercontent.com/tripledes/kubevirt-tutorial/sjr_refactor/administrator/ansible/roles/kubevirt/files/student-materials/KubeVirt-grafana-dashboard.json
 ```
 
-Now, point your browser to your node's hostname port 30300. You'll be greet with Grafan's login page, use the following authentication details:
+Now, point your browser to your node's hostname port 30300. You'll be greet with Grafana's login page, use the following authentication details:
 
 * User: admin
 * Password: kubevirtlab123
