@@ -44,26 +44,26 @@ Again, these will tend to be ever-growing numbers, thus PromQL functions are nee
 
 ### Using Grafana
 
-In the student materials (*~/student-materials*) you'll find a [Grafana](https://grafana.org) dashboard we've prepared for you all, so let's import it and see what it shows:
-
-**TODO**
+In the student materials (*~/student-materials*) you'll find a [Grafana](https://grafana.org) dashboard we've prepared for you all, so let's import it and see what it shows, perform the following steps in your own workstation/laptop:
 
 ```console
-<curl_here>
+$ wget https://raw.githubusercontent.com/tripledes/kubevirt-tutorial/sjr_refactor/administrator/ansible/roles/kubevirt/files/student-materials/KubeVirt-grafana-dashboard.json
 ```
 
-Once imported, point your browser to your node's hostname port 30300. You'll be greet with Grafan's login page, use the following authentication details:
+Now, point your browser to your node's hostname port 30300. You'll be greet with Grafan's login page, use the following authentication details:
 
 * User: admin
 * Password: kubevirtlab123
 
 ![Grafana login page](images/grafana-01.png)
 
-On the first page, top bar, open up the *Home* menu and click on the *KubeVirt* dashboard, the one we've just imported:
+For importing the dashboard, click on the *plus* symbol, to the left of the page and then *Import*:
 
-![Grafana dashboard list](images/grafana-02.png)
+![Grafana dashboard import page](images/grafana-02.png)
 
-The following dashboard will be open:
+Click on the *Upload .json File* button, find the dashboard file and import it!
+
+The dashboard will be open right away:
 
 ![Grafana KubeVirt dashboard](images/grafana-03.png)
 
