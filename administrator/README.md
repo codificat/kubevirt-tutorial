@@ -44,7 +44,11 @@ terraform apply -var-file varfiles/opensouthcode19.tfvars
 TF_LOG=DEBUG terraform apply -var-file varfiles/opensouthcode19.tfvars -refresh=true
 ###
 cd ../ansible
-ANSIBLE_ROLES_PATH=roles GCE_INI_PATH=~/.ansible/inventory/gce.ini ansible-playbook -i ~/.ansible/inventory/gce.py -l tag_kubevirtlab playbooks/kubernetes.yml
+wget <SSH KEY URL> -O ~/.ssh/cnv_lab_new
+wget <SSH PUB URL> -O ~/.ssh/cnv_lab_new.pub
+ssh-add ~/.ssh/cnv_lab_new
+### Here you need to put the right password
+ANSIBLE_ROLES_PATH=roles GCE_INI_PATH=~/.ansible/inventory/gce.ini ansible-playbook -i ~/.ansible/inventory/gce.py --private-key ~/.ssh/cnv_lab_new -l tag_kubevirtlab playbooks/kubernetes.yml
 ```
 
 ## Versions used

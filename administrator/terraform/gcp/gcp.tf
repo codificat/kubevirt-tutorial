@@ -54,5 +54,5 @@ module "gcp_kubevirt_lab" {
     
     user_data       = "Kubevirt Laboratory for ${var.lab_description}"
     username        = "${var.lab_username}"
-    public_key_path = "~/.ssh/id_rsa.pub"
+    public_key_path = "~/.ssh/cnv_lab_new.pub"
 }
