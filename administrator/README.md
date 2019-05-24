@@ -2,15 +2,6 @@
 
 This directory provides bases to deploy the lab.
 
-## TODO
-
-* Create GCP infra
-  * Grafana uses a nodeport, 30300/tcp
-  * KubeVirt Web UI has to be exposed as well
-  * Create instances
-* Make the terraform files more generic
-  * Adapt it for GCP, if possible set the basis for adding more providers in the future
- 
 ## Requirements
 
 * Terraform (libvirt provider)
@@ -57,7 +48,7 @@ ANSIBLE_ROLES_PATH=roles GCE_INI_PATH=~/.ansible/inventory/gce.ini ansible-playb
 | ----------- | -------- |
 | Kubernetes  | stable-1 |
 | kubevirt    | v0.17.0  |
-| cdi         | 1.8.0    |
+| cdi         | 1.9.0    |
 
 ## Terraform variable file example
 

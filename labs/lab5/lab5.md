@@ -2,7 +2,7 @@
 
 ## Deploy a VM using a DataVolume
 
-Explore the VM manifests, note it uses a [DataVolume](https://kubevirt.io/user-guide/docs/latest/creating-virtual-machines/disks-and-volumes.html#datavolume)
+Explore the VM manifests, notice it uses a [DataVolume](https://kubevirt.io/user-guide/docs/latest/creating-virtual-machines/disks-and-volumes.html#datavolume)
 
 ```console
 $ view ~/student-materials/vm_datavolume.yml
@@ -14,6 +14,7 @@ Now let's start this VM and we'll observe the image importing process before the
 $ cd ~/student-materials/
 $ kubectl create -f vm_datavolume.yaml
 virtualmachine.kubevirt.io/vm2 created
+
 $ kubectl logs -f cdi.kubevirt.io/storage.import.importPvcName=vm2-dv
 I0517 14:43:45.670580       1 importer.go:58] Starting importer
 I0517 14:43:45.670866       1 importer.go:100] begin import process
@@ -34,7 +35,7 @@ I0517 14:44:04.317260       1 data-processor.go:230] Expanding image size to: 10
 I0517 14:44:04.373807       1 data-processor.go:167] New phase: Complete
 ```
 
-Again, we can connect to the VM's console and check if we've got that extra space that CDI made for us:
+Again, we can connect to the VM's serial console and check if we've got that extra space that CDI made for us:
 
 ```console
 $ virtctl console vm2
@@ -45,7 +46,7 @@ cirros login: cirros
 Password:
 $ df -h /
 Filesystem                Size      Used Available Use% Mounted on
-/dev/vda1                 9.6G     23.9M      9.3G   0% /
+/dev/vda1                 4.8G     24.1M      4.6G   1% /
 ```
 
 ## Explore the DataVolume
@@ -127,16 +128,14 @@ Pay special attention to the *Annotations* section where CDI introduces interest
 
 ## Recap
 
-* We've created a second VM, *vm2*, this included a *DataVolume* template which instructs KubeVirt and CDI to:
-  * Create a PVC which uses a PVs already created on the cluster.
-  * The CDI importer pod, takes the source, in this case a URL, and imports the image directly to the PV attached to the PVC.
-  * Once that process finishes, a *virt-launcher* pod starts using the imported image as boot disk.
-* Another detail that might go unnoticed, CDI is able to detect the requested storage size, the available one (accounting for file system overhead) and resize the image, presenting to the VM the closest amount of space possible to the user request.
-* We've connected to *vm2's* console and verified the root partition was expanded to the available disk size, this is usually done through configuration services like *cloud-init*.
+* We've created a second VM, *vm2*, this one included a *DataVolume* template which instructs KubeVirt and CDI to:
+  * Create a PVC which uses a PV already created on the cluster
+  * The CDI importer pod, takes the source, in this case a URL, and imports the image directly to the PV attached to the PVC
+  * Once that process finishes, a *virt-launcher* pod starts using the same PVC, with the imported image, as boot disk
+* A detail that might go unnoticed, CDI is able to detect the requested storage size, the available space (accounting for file system overhead) and resize the image accordingly
+* We've connected to *vm2's* serial console and verified the root partition was expanded to the disk size, this is usually done through configuration services like *cloud-init*
 
-
-This concludes this section of the lab.
-
+This concludes this section of the lab, spend some time checking out all the objects and how they relate to each other, then head off to the next lab!
 
 [Next Lab](../lab6/lab6.md)\
 [Previous Lab](../lab5/lab5.md)\

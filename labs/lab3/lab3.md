@@ -11,10 +11,9 @@ In this section we're going to deploy the following three components:
 * [KubeVirt Web UI](https://github.com/kubevirt/web-ui)
   * Provides a graphical environment to manage VM based workloads
 
-
 ## Install the KubeVirt Operator
 
-Starting with the KubeVirt Operator, being connected to your assigned instance, execute the following steps.
+We're going to start with the KubeVirt Operator, being connected to your assigned instance, execute the following steps:
 
 ```console
 $ cd ~/kubevirt/kubevirt-operator-manifests
@@ -62,7 +61,7 @@ replicaset.apps/virt-controller-76765f49f9   2         2         2       99m
 replicaset.apps/virt-operator-5ddb4674b9     2         2         2       101m
 ```
 
-Let's verify we can reach KubeVirt API:
+Let's verify the KubeVirt API is reachable:
 
 ```console
 $ virtctl version
@@ -127,13 +126,13 @@ servicemonitor.monitoring.coreos.com/kubevirtlab-kubevirt created
 Let's summarize what happened on this lab:
 
 * We've installed both KubeVirt and CDI operators:
-  * Which enabled us to deploy instances of both products.
-  * Created the necessary CRDs to manage VMs and storage.
-* We tested the KubeVirt API is available using *virtctl*, the CLI tool for interacting with KubeVirt VMs.
-* Finally, we've deployed a *ServiceMonitor* object to tell Prometheus to scrap the KubeVirt components, including the VMs we'll be running in the subsequent labs.
+  * The operators enabled us to deploy instances (CRs) of both products
+  * Created the both CRs, for KubeVirt and CDI, which the operator observed and act accordingly
+* We tested KubeVirt's API is available using *virtctl*, the CLI tool for interacting with KubeVirt VMs
+* Finally, we've deployed a *ServiceMonitor* object to tell Prometheus to scrap the KubeVirt components, including the VMs we'll be running in the subsequent labs
 
 
-This concludes this section, please head to the next one!
+This concludes this section, take your time to review what's been deployed, all the resources, etc and then head off to the next lab!
 
 [Next Lab](../lab4/lab4.md)\
 [Previous Lab](../lab2/lab2.md)\
