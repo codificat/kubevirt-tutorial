@@ -10,12 +10,13 @@ This lab is designed to accommodate many students. As a result, each one will be
 
 The naming convention for the lab VMs is: **kubevirtlab-\<number\>.gce.sexylinux.net**. You will be assigned a number by the instructor.
 
-All the boxes have been provisioned with an SSH public key, so you can SSH into your instance, [download the private key](http://people.redhat.com/kboumedh/cnv_rsa) file to your local workstation and change the permissions of the file to 600.
+All the boxes have been provisioned with an SSH public key, so you can SSH into your instance using the ssh key located into [RSA](./RSA) folder.
 
 ```console
-$ wget http://people.redhat.com/kboumedh/cnv_rsa
-$ chmod 600 cnv_rsa
+$ ssh-add ./RSA/cnv_lab_new
 ```
+
+NOTE: The password for this RSA is 'fedora'
 
 ### Connecting to your Instance
 
