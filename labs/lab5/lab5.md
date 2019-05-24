@@ -15,7 +15,10 @@ $ cd ~/student-materials/
 $ kubectl create -f vm_datavolume.yaml
 virtualmachine.kubevirt.io/vm2 created
 
-$ kubectl logs -f cdi.kubevirt.io/storage.import.importPvcName=vm2-dv
+$kubectl get pods | grep importer
+importer-vm2-dv-sgch7
+
+$ kubectl logs -f importer-vm2-dv-sgch7
 I0517 14:43:45.670580       1 importer.go:58] Starting importer
 I0517 14:43:45.670866       1 importer.go:100] begin import process
 I0517 14:43:47.098597       1 data-processor.go:237] Calculating available size
@@ -52,7 +55,7 @@ Filesystem                Size      Used Available Use% Mounted on
 ## Explore the DataVolume
 
 ```console
-$ kubectl get dv vm2-dv
+$ kubectl describe dv vm2-dv
 Name:         vm2-dv
 Namespace:    default
 Labels:       kubevirt.io/created-by=09dda4d2-78b2-11e9-b502-e6faa692a1af
