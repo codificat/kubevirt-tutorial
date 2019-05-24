@@ -49,3 +49,8 @@
         replicas: 2
   vars:
     ansible_become: False
+
+- name: Allow Priville CoreDNS deployment down to 1 replica
+  shell: "kubectl -n kube-system get deployment coredns -o yaml | sed 's/allowPrivilegeEscalation: false/allowPrivilegeEscalation: true/g' | kubectl apply -f -"
+  vars:
+    ansible_become: False
