@@ -18,13 +18,13 @@ $ chmod 600 cnv_lab_rsa
 $ ssh-add cnv_lab_rsa
 ```
 
-NOTE: The password for this RSA is 'fedora'
+**NOTE**: The password for this RSA is 'fedora'
 
 ### Connecting to your Instance
 
 This lab should be performed on **YOUR ASSIGNED INSTANCE** only, as *kubevirt-user* user, unless otherwise instructed.
 
-**_NOTE_**: Please be respectful and only connect to your assigned instance. All instances on this lab use the **same** public key, so you could accidentally connect to the wrong system. If you have any issues, please inform an instructor/s.
+**NOTE**: Please be respectful and only connect to your assigned instance. All instances on this lab use the **same** public key, so you could accidentally connect to the wrong system. If you have any issues, please inform an instructor/s.
 
 ```console
 $ ssh -i cnv_lab_rsa kubevirt-user@kubevirtlab-<number>.gce.sexylinux.net
