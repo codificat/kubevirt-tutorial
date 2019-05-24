@@ -42,6 +42,8 @@ local-pv-a56cebb5   5109Mi     RWO            Delete           Available        
 And finally, let's check that Prometheus and Grafana are running and exposed:
 
 ```console
+$ kubectl get all -n prometheus
+
 NAME                                                         READY   STATUS    RESTARTS   AGE
 pod/alertmanager-kubevirtlab-prometheus-ope-alertmanager-0   2/2     Running   0          2d
 pod/kubevirtlab-grafana-bf9db4bd9-r8pmt                      2/2     Running   0          2d
