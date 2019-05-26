@@ -1,36 +1,25 @@
-# NOTES for OpenSouthCode
+# NOTES
 
-* Replace OCP by Kubernetes
-* Include Prometheus Operator (missing)
-* 2nd Network for multus (This should be already there)
-* How many VMs ?
-  * 1 Master - No migrations, make the master schedulable
-  * 1 Master + 1 Worker - Could include migrations
+* Switch to OKD
+  * Include a worker node to demo live migrations
 * Storage (TBD)
-  * local storage
-    * self-contained solution
   * Shared NFS server ?
     * Easy to set up and manage
     * Low infra requirements
   * Shared Ceph Cluster (standalone)? 
+    * Maintenance
+    * External dependency
   * Dedicated Rook cluster by student ?
-* Besides deploying/exploring HCO, the rest could be done from the UI (?)
-* Labs
-  * Deploy KubeVirt (HCO) and explore the outcome
-    * Add on the VMs a HCO repo clone with a know working tag/commit
-    * Explore
-      * linux-bridge
-      * multus
-      * hyperconverged-kubevirt
-  * Deploy a first containerDisk based VM
-    * No external storage needs
-    * Could explore metrics already with this one
-  * Import a VM disk using CDI
-    * Requires storage
-  * Deploy a VM using a DataVolume with source the image imported in the previous lab
-  * Deploy a VM (or the same) with an additional network (multus + OVS)
+    * Ansible role
+    * No maintenance 
+* HCO
+  * Once it stabilizes
+  * Deploy from UI (requires OKD)
+* Ansible
+  * One of the VMs could be deployed using Ansible
 
-## TODO
+## Issues
 
-* Expose Kubevirt Web UI
-* Create node-maintenance-operator NS <- Keep an eye upstream for fixes
+* KubeVirt Pods go on ContainerConfigError
+* UI wizard seems to be looking for projects instead of namespaces
+* UI operator seems to only work in OCP
