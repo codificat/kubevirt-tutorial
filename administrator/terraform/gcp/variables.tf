@@ -94,6 +94,6 @@ variable "lab_description" {
 
 variable "lab_username" {
   type        = "string"
-  default     = "kubevirt-user"
+  default     = "kubevirt"
   description = "New user for Laboratory"
 }

@@ -46,13 +46,12 @@ module "gcp_kubevirt_lab" {
     disk_size       = "${var.gcp_boot_image_size_gb}"
     disk_image      = "${var.gcp_boot_image}"
     
-    #dns_name        = "${module.google-dns-managed-zone.dns_name}"
-    #dns_zone        = "${module.google-dns-managed-zone.dns_zone}"
     dns_name        = "${var.gcp_network_name}"
     dns_zone        = "${var.dns_domain_name}"
-    dns_record_name = "${var.gcp_instance_tag}"
+    hostname_prefix = "${var.hostname_prefix}"
     
     user_data       = "Kubevirt Laboratory for ${var.lab_description}"
     username        = "${var.lab_username}"
     public_key_path = "~/.ssh/cnv_lab_new.pub"
+    instance_tag    = "${var.gcp_instance_tag}" 
 }
