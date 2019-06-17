@@ -1,5 +1,7 @@
 # Lab 7
 
+**DISCLAIMER:** The WebUI is fully functional on Openshift, but not yet in Kubernetes (we are working on it! :D). If you try to spin up a VM using the wizard, the namespaces will not be shown, don't worry about that, just continue with the labs avoiding this part.
+
 ## Using the Kubevirt UI to interact with VMs
 
 In this section, we will install and interact with VMs using KubeVirt's dedicated UI.

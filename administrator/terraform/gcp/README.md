@@ -17,6 +17,9 @@ TF_LOG=DEBUG terraform plan -var-file varfiles/opensouthcode19.tfvars -refresh=t
 TF_LOG=DEBUG terraform apply -var-file varfiles/opensouthcode19.tfvars -refresh=true
 ```
 
+**Note**: Does not work with Terraform 0.12
+- https://github.com/terraform-providers/terraform-provider-google/issues/3280
+
 ### Ansible
 
 It's a bit complicated but [here it's very well explained](https://devopscube.com/ansible-dymanic-inventry-google-cloud/), I recommend to follow those commands.
